@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+    <h1>Quiz Questions</h1>
+    <div id="quiz"></div>
+
+    <script>
+        // REST API URL
+        const apiUrl = "http://localhost:8080/api/questions";
+
+        // Kérdések lekérése
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const quizDiv = document.getElementById("quiz");
+
+                if (data.length === 0) {
+                    quizDiv.innerHTML = "<p>No questions available yet.</p>";
+                    return;
+                }
+
+                data.forEach((q, index) => {
+                    // Kérdés szöveg
+                    const questionElem = document.createElement("h3");
+                    questionElem.textContent = `${index + 1}. ${q.question}`;
+                    quizDiv.appendChild(questionElem);
+
+                    // Opciók listája
+                    const ul = document.createElement("ul");
+                    q.options.forEach((opt, i) => {
+                        const li = document.createElement("li");
+                        li.textContent = opt;
+                        ul.appendChild(li);
+                    });
+                    quizDiv.appendChild(ul);
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching questions:", error);
+                document.getElementById("quiz").innerHTML = "<p>Failed to load questions.</p>";
+            });
+    </script>
+</body>
+</html>
