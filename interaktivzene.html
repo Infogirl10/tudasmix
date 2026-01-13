@@ -4,58 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="hatter.css">
-    <title>Ha egy kis zenére vágynál</title>
+    <title>Klasszikus Zenebox</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        #playlist {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        #playlist li {
+            padding: 10px;
+            margin: 5px auto;
+            max-width: 400px;
+            background: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+
+        #playlist li.active {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+
+        #playlist li:hover {
+            transform: scale(1.02);
+        }
+
+        #prev, #next {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border-radius: 6px;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #prev:hover, #next:hover {
+            background-color: #1abc9c;
+            transform: scale(1.05);
+        }
+
+        audio {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 15px;
+        }
+
+        /* Mobil nézet */
+        @media (max-width: 768px) {
+            #playlist li {
+                max-width: 90%;
+            }
+
+            #prev, #next {
+                width: 40%;
+                margin: 10px 5px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <a href="fooldal.html">Főoldal</a>
+
+    <a href="fooldal.html"><button>Főoldal</button></a>
     <a href="zenetori.html"><button>Zeneirodalom</button></a>
-    <h1>Klasszikus zenebox</h1>
+
+    <h1>Klasszikus Zenebox</h1>
+
     <ul id="playlist">
-        <li data-src="zene.mp3">MOZART FACILE SONATA </li>
+        <li data-src="zene.mp3">MOZART: Facile Sonata</li>
         <li data-src="zene2.mp3">MOZART: Török induló</li>
-        <li data-src="zene3.mp3">VIVADI:Négy évszak: Tél</li>
-        
-        
+        <li data-src="zene3.mp3">VIVALDI: Négy évszak - Tél</li>
     </ul>
+
+    <!-- Lapozó gombok -->
+    <button id="prev">⬅ Előző</button>
+    <button id="next">➡ Következő</button>
+
     <audio id="audio" controls></audio>
 
     <script>
-        // Elemi hivatkozások
         const audio = document.getElementById('audio');
         const playlist = document.getElementById('playlist');
         const tracks = playlist.querySelectorAll('li');
         let currentTrack = 0;
 
-        // Funkció a lejátszási lista elindításához
+        // Zeneszám lejátszása
         function playTrack(index) {
+            if (index < 0 || index >= tracks.length) return;
             const track = tracks[index];
-            if (!track) return; // Ha nincs több zene, kilépünk
             audio.src = track.getAttribute('data-src');
             audio.play();
             currentTrack = index;
+            updateActive();
         }
 
-        // Automatikus folytatás, ha a zene véget ér
+        // Kiemeli az aktuális számot
+        function updateActive() {
+            tracks.forEach((t, i) => {
+                t.classList.toggle('active', i === currentTrack);
+            });
+        }
+
+        // Automatikus következő
         audio.addEventListener('ended', () => {
             if (currentTrack + 1 < tracks.length) {
                 playTrack(currentTrack + 1);
             }
         });
 
-        // Lejátszás indítása az első zeneszámmal
-        playTrack(0);
-    </script> <br>
-    <br>
-    Zongora 88 billentyűje <br>
-    <img src="hangokk.png" alt="hangok"> <br>
-    <br>
-Hangszerek: <br>
-fúvós hangszerek:furulya, fuvola, oboa, klarinét, fagott <br>
-ütős hangszerek:dob, cintányér <br>
-vonós hangszerek:hegedű, brácsa, cselló, nagybögő <br>
-pengetős hangszerek:gitár, mandolin, <br>
-billentyűs hangszerek:orgona, zongora, csemballó  <br>
+        // Lapozó gombok
+        document.getElementById('prev').addEventListener('click', () => {
+            if (currentTrack > 0) playTrack(currentTrack - 1);
+        });
 
-    
+        document.getElementById('next').addEventListener('click', () => {
+            if (currentTrack + 1 < tracks.length) playTrack(currentTrack + 1);
+        });
+
+        // Kattintás a listára
+        tracks.forEach((track, index) => {
+            track.addEventListener('click', () => playTrack(index));
+        });
+
+        // Első zeneszám elindítása
+        playTrack(0);
+    </script>
+
 </body>
 </html>

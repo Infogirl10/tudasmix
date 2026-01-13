@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="hatter.css">
+    <title>Általános Kémia – Tudás-MIX</title>
+    <style>
+        /* Extra kártyás stílus a sablonhoz */
+     /* Gombok */
+button {
+    padding: 10px 15px;
+    margin: 8px 5px;
+    border-radius: 6px;
+    border: none;
+    background-color: #3498db; /* Kék alapból látszik */
+    color: white;              /* Fehér szöveg */
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Hover effekt csak plusz vizuális változás */
+button:hover {
+    background-color: #1abc9c; /* Világos zöld hoverkor */
+    transform: scale(1.05);
+}
+
+/* Kártyák (tartalom dobozok) */
+.card {
+    background-color: #f9f9f9;   /* világos, jól látható */
+    border-left: 5px solid #3498db; /* kék sáv mindig látszik */
+    padding: 20px;
+    margin: 15px auto;
+    max-width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: left;
+    transition: 0.2s;
+}
+
+/* Hover csak kicsit kiemeli */
+.card:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transform: scale(1.02);
+}
+
+/* Linkek */
+.card a {
+    color: hsl(0, 86%, 37%);  /* narancs, mindig látszik */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card a:hover {
+    color: #d35400;  /* sötétebb narancs hoverkor */
+}
+
+
+        /* Mobil nézet */
+        @media (max-width: 768px) {
+            .card {
+                max-width: 95%;
+                padding: 15px;
+            }
+
+            button {
+                width: 100%;
+                margin: 6px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Általános Kémia</h1>
+        <p>Tananyagok, feladatok, kísérletek</p>
+        <a href="fooldal.html"><button>⬅ Vissza a főoldalra</button></a>
+    </header>
+
+    <main>
+
+      <p>
+1. Atomszerkezet <br>
+2. A periódusos rendszer <br>
+3. Kémiai kötések <br>
+4. Molekulák, összetett ionok <br>
+5. Anyagi halmazok <br>
+6. Egykomponensű anyagi rendszerek <br>
+7. Többkomponensű rendszerek <br>
+8. Kémiai átalakulások <br>
+9. Termokémia <br>
+10. Reakciókinetika <br>
+11. Egyensúly <br>
+12. A kémiai reakciók típusai <br>
+13. Elektrokémia <br>
+      </p>
+
+        <!-- Külső segédletek -->
+        <section class="card">
+            <h2>🔬 Külső segédletek</h2>
+            <ul>
+                <li><a href="https://kemiaerettsegi.hu/szamitas.html"target="_blank" rel="noopener noreferrer">Kémiai számolások</a></li>
+                <li><a href="https://biokemonline.com/kemia-bejegyzesek/" target="_blank" rel="noopener noreferrer">Kísérletek videón</a></li>
+            </ul>
+        </section>
+
+        <!-- Képek / ábrák <section class="card">
+            <h2>📷 Ábrák, ábrázolások</h2>
+            <img src="kemia_abra.png" alt="Kémiai ábra" style="max-width:100%; border-radius:8px;">
+        </section>-->
+        
+
+    </main>
+
+</body>
+</html>
